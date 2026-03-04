@@ -11,7 +11,24 @@ allowed-tools: Read, Write, Edit, Grep, Glob, Bash, AskUserQuestion
 
 MDD is the core development workflow. Every feature starts with documentation, every fix starts with an audit. No exceptions.
 
-## Step 0 — Detect Mode
+## Step 0 — Worktree Check (before everything else)
+
+Before any other work, offer worktree isolation for parallel `/mdd` sessions:
+
+1. Check current branch: `git branch --show-current`
+2. Ask the user via AskUserQuestion:
+   - **Question:** "Do you want to work in an isolated worktree? This lets you run multiple `/mdd` sessions in parallel."
+   - **Options:**
+     - **"No, continue here" (Recommended)** — proceed in current directory with auto-branch as usual
+     - **"Yes, create a worktree"** — create an isolated worktree, then the user re-runs `/mdd` there
+3. If the user selects **"Yes, create a worktree"**:
+   - Derive a slug from `$ARGUMENTS` (e.g., `add-auth` from "add auth system"). If no arguments, ask for a name.
+   - Run: `/worktree mdd-<feature-slug>` (this creates a sibling directory with its own branch)
+   - Tell the user: "Worktree created. Open a new Claude Code session in the worktree directory and run `/mdd $ARGUMENTS` there."
+   - **STOP here** — do not continue in the current session (the working directory hasn't changed)
+4. If the user selects **"No, continue here"** — proceed to Step 0b below.
+
+## Step 0b — Detect Mode
 
 Parse `$ARGUMENTS` to determine the mode:
 
@@ -346,7 +363,9 @@ Run `/mdd audit` to refresh or `/mdd <feature>` to build something new.
 
 ## Auto-Branch (All Modes)
 
-Before creating or modifying any files, check the current branch:
+**If the user already chose a worktree in Step 0, skip auto-branch entirely** — the worktree was created with its own dedicated branch.
+
+Otherwise, before creating or modifying any files, check the current branch:
 
 ```bash
 git branch --show-current

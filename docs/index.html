@@ -276,6 +276,10 @@
           <strong>We used MDD to audit this starter kit.</strong> Result: 20 findings discovered, 17 fixed, and 125 tests written from zero &mdash; all in <strong>23 minutes</strong>. The methodology the starter kit teaches was used to audit the starter kit itself.
         </div>
 
+        <div class="callout" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.05)); border-left: 4px solid #3b82f6; padding: 1.25rem; border-radius: 0.5rem; margin-bottom: 2rem;">
+          <strong>Parallel workflows supported.</strong> <code>/mdd</code> now asks if you want to work in an isolated worktree &mdash; run multiple <code>/mdd</code> sessions simultaneously, each in its own directory and branch. Use <code>/worktree</code> for complete isolation.
+        </div>
+
         <h3>What is MDD?</h3>
         <p>Most people prompt Claude Code like this: <em>"fix the bug in my auth system."</em> Claude reads 40 files, burns through context trying to understand your architecture, and produces something that technically compiles but misses the bigger picture.</p>
         <p>MDD flips this. You write structured documentation first, then Claude reads <strong>one doc</strong> instead of 40 files. It gets the full picture in 200 tokens instead of 20,000. Every phase reads the output of the previous phase, compressing context further at each step.</p>

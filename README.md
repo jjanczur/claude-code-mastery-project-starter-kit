@@ -107,6 +107,8 @@ Everything you need to start a Claude Code project the right way — security, a
 
 > **We used MDD to audit this starter kit.** Result: 20 findings discovered, 17 fixed, and 125 tests written from zero — all in **23 minutes**. The methodology the starter kit teaches was used to audit the starter kit itself.
 
+> **Parallel workflows supported.** `/mdd` now asks if you want to work in an isolated worktree — run multiple `/mdd` sessions simultaneously, each in its own directory and branch. Use `/worktree` for complete isolation.
+
 MDD is the built-in development methodology that turns Claude Code from a code generator into a development partner. Every feature starts with documentation. Every fix starts with an audit.
 
 ### The Problem
